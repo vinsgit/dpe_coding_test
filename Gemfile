@@ -54,6 +54,7 @@ group :test do
   gem "selenium-webdriver"
   gem "mongoid-rspec"
   gem "database_cleaner-mongoid"
+  gem 'webmock'
 end
 
 gem "mongoid", "~> 9.0.2"
