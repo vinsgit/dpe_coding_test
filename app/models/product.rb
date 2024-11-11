@@ -15,7 +15,6 @@ class Product
 
   validates :name, presence: true
   validates :qty, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :default_price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   index({ category_id: 1 })
   index({ name: 1 })

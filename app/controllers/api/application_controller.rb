@@ -23,11 +23,9 @@ module Api
     end
 
     def create_user!
-      raise Errors::InvalidName.new('invalid username!') if params[:username] == User::ADMIN_NAME
+      raise Errors::InvalidNameError.new('invalid username!') if params[:username] == User::ADMIN_NAME
 
-      begin
-        User.create!(username: params[:username], password: params[:password])
-      end
+      User.create!(username: params[:username], password: params[:password])
     end
   end
 end

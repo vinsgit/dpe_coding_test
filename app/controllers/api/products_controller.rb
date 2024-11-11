@@ -3,6 +3,8 @@ module Api
     rescue_from Errors::CsvImportError,
                 Errors::UnauthorizedError,
                 Errors::ProductImportError,
+                InventoryImporter::Errors::CsvImportError,
+                Errors::InvalidNameError,
                 with: :handle_error
 
     before_action :authenticate_user, only: [:import]

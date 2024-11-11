@@ -4,6 +4,13 @@ Rails.application.routes.draw do
       post 'import', on: :collection
     end
 
+    resources :carts, only: [] do
+      collection do
+        put :add
+        post :place_order
+      end
+    end
+
     resources :users, only: [:index]
   end
 end
