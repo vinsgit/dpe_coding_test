@@ -58,7 +58,7 @@ class DynamicPricingService
 
   def log_price_changing(new_price)
     PricingLog.create(
-      product: @product,
+      product: @product.id,
       previous_price: @product.dynamic_price,
       new_price: new_price,
       reason: "Dynamic pricing calculation"
