@@ -6,4 +6,6 @@ class Category
   field :description, type: String
 
   has_many :products
+
+  index({ name: 1 }, { unique: true })
 end

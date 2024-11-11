@@ -6,6 +6,6 @@ class ProductSerializer < ActiveModel::Serializer
   end
 
   def price
-    object.dynamic_price.presence || object.default_price
+    object.display_price
   end
 end

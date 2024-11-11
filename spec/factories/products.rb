@@ -4,7 +4,6 @@ FactoryBot.define do
     qty { rand(1..100) }
     default_price { rand(10.0..100.0) }
     dynamic_price { nil }
-    demand_factor { nil }
     association :category
   end
 end

@@ -1,6 +1,11 @@
 module Api
-  class ProductsController < ActionController::API
-    rescue_from InventoryImporter::Errors::CsvImportError, with: :handle_import_error
+  class ProductsController < ApplicationController
+    rescue_from Errors::CsvImportError,
+                Errors::UnauthorizedError,
+                Errors::ProductImportError,
+                with: :handle_error
+
+    before_action :authenticate_user, only: [:import]
 
     def index
       products = Product.all
@@ -13,6 +18,8 @@ module Api
     end
 
     def import
+      raise Errors::UnauthorizedError, 'Unauthorized!' unless current_user&.admin?
+
       if csv_validator.valid?
         import_service.import
         render json: { message: 'success' }, status: :ok
@@ -27,10 +34,6 @@ module Api
 
     def import_service
       InventoryImporter.new(params[:inventory_file])
-    end
-
-    def handle_import_error(error)
-      render json: { message: error.message }, status: :unprocessable_entity
     end
   end
 end
